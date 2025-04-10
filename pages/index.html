@@ -62,6 +62,29 @@
           application/json" -d '{"description": "Buy groceries", "relatedTo":
           1}'</code
         >
+
+        <div
+          style="
+            background-color: #ffcccc;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 15px;
+            border: 1px solid #ff0000;
+          "
+        >
+          <p>
+            <strong>⚠️ Known Bug:</strong> Providing a
+            <code style="display: inline; padding: 3px; margin: 0"
+              >relatedTo</code
+            >
+            ID that doesn't exist will cause the server to crash with error:
+          </p>
+          <code
+            >{"message":"Server crashed processing related
+            task.","error":"Cannot set properties of undefined (setting
+            'completed')"}</code
+          >
+        </div>
       </div>
     </div>
   </body>
