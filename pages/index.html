@@ -1,13 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Hello Express!</title>
+    <title>API Documentation</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="./style.css" />
+    <style>
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .endpoint {
+        margin-bottom: 30px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+      code {
+        display: block;
+        background: #f5f5f5;
+        padding: 10px;
+        border-radius: 4px;
+        white-space: nowrap;
+        overflow-x: auto;
+        margin: 10px 0;
+      }
+    </style>
   </head>
   <body>
-    <h1>Hello Express!</h1>
-    <p>Showing <code>pages/index.html</code></p>
+    <div class="container">
+      <h1>API Endpoints Documentation</h1>
+
+      <div class="endpoint">
+        <h2>1. Get All Tasks</h2>
+        <p>Retrieve all tasks with optional filters for category and name.</p>
+        <p><strong>Endpoint:</strong> GET /api/tasks</p>
+        <p><strong>Optional Query Parameters:</strong></p>
+        <ul>
+          <li>category - Filter by category</li>
+          <li>name - Filter by name</li>
+        </ul>
+        <p><strong>Example Requests:</strong></p>
+        <code>curl http://localhost:3010/api/tasks </code>
+      </div>
+
+      <div class="endpoint">
+        <h2>2. Create New Task</h2>
+        <p>
+          Create a new task with a description and optional related task ID.
+        </p>
+        <p><strong>Endpoint:</strong> POST /api/tasks</p>
+        <p><strong>Required Fields:</strong></p>
+        <ul>
+          <li>description - Task description</li>
+          <li>relatedTo - ID of related task (optional)</li>
+        </ul>
+        <p><strong>Example Request:</strong></p>
+        <code
+          >curl -X POST http://localhost:3010/api/tasks -H "Content-Type:
+          application/json" -d '{"description": "Buy groceries", "relatedTo":
+          1}'</code
+        >
+      </div>
+    </div>
   </body>
 </html>
