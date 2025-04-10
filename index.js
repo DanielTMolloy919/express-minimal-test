@@ -3,6 +3,7 @@ const { resolve } = require('path');
 
 const app = express();
 const port = 3010;
+app.use(express.json());
 
 let tasks = [
   { id: 1, description: 'Learn Express', completed: false, relatedTo: null },
