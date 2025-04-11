@@ -4,14 +4,13 @@ const { resolve } = require("path");
 const app = express();
 const port = 3010;
 app.use(express.json());
+app.use(express.static("static"));
 
 let tasks = [
   { id: 1, description: "Learn Express", completed: false, relatedTo: null },
   { id: 2, description: "Build API", completed: false, relatedTo: 1 }, // Task 2 relates to Task 1
 ];
 let nextId = 3;
-
-app.use(express.static("static"));
 
 app.get("/", (req, res) => {
   res.sendFile(resolve(__dirname, "pages/index.html"));
@@ -42,6 +41,7 @@ app.post("/api/tasks", (req, res) => {
     completed: false,
     relatedTo: relatedTo ? parseInt(relatedTo, 10) : null,
   };
+
   tasks.push(newTask);
   console.log("Task added:", newTask);
 
