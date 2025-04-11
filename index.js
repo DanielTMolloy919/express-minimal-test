@@ -45,28 +45,26 @@ app.post("/api/tasks", (req, res) => {
   tasks.push(newTask);
   console.log("Task added:", newTask);
 
-  try {
-    if (newTask.relatedTo !== null) {
-      console.log(
-        `Attempting to find related task with ID: ${newTask.relatedTo}`
-      );
-      const relatedTask = tasks.find((t) => t.id === newTask.relatedTo);
-
-      relatedTask.completed = newTask.completed;
-      console.log(`Updated related task ${relatedTask.id}`);
-    }
-
-    res.status(201).json(newTask);
-  } catch (error) {
-    console.error(
-      "!!! CRITICAL ERROR in POST /api/tasks processing related task !!!",
-      error
+  if (newTask.relatedTo !== null) {
+    console.log(
+      `Attempting to find related task with ID: ${newTask.relatedTo}`
     );
-    res.status(500).json({
-      message: "Server crashed processing related task.",
-      error: error.message,
-    });
+    const relatedTask = tasks.find((t) => t.id === newTask.relatedTo);
+
+    relatedTask.completed = newTask.completed;
+    console.log(`Updated related task ${relatedTask.id}`);
   }
+
+  res.status(201).json(newTask);
+});
+
+// Global error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).json({
+    message: "An unexpected error occurred",
+    error: process.env.NODE_ENV === "production" ? undefined : err.message,
+  });
 });
 
 app.listen(port, () => {
